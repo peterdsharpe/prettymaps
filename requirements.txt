@@ -1,0 +1,2 @@
+git+https://github.com/abey79/vsketch#egg=vsketch
+git+https://github.com/marceloprates/prettymaps.git
