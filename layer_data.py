@@ -2,7 +2,6 @@ def get_defaults(
         square=False,
         dilate=100,
 ):
-
     # Which OpenStreetMap layers to plot and their parameters:
     layers = {
         # Perimeter (in this case, a circle)
@@ -24,7 +23,9 @@ def get_defaults(
                 'pedestrian'  : 2,
                 'footway'     : 1,
                 'track'       : 1,
-                'bridleway'   : 1
+                'bridleway'   : 1,
+                'runway'      : 10,
+                'taxiway'     : 5,
             }
         },
         'building' : {
@@ -32,13 +33,17 @@ def get_defaults(
                 'building': True,
                 'landuse' : 'construction',
                 'leisure' : 'track',
+                'aeroway' : [
+                    'terminal',
+                    'hangar'
+                ]
             }, 'union': False
         },
         'water'    : {
             'tags': {
-                'natural': ['water', 'bay', 'strait', 'spring', 'hot_spring'],
-                'water'  : True,
-                'place': 'sea',
+                'natural' : ['water', 'bay', 'strait', 'spring', 'hot_spring'],
+                'water'   : True,
+                'place'   : 'sea',
                 'waterway': True,
             }
         },
@@ -84,7 +89,14 @@ def get_defaults(
             'tags': {
                 'amenity' : 'parking',
                 'highway' : 'pedestrian',
-                'man_made': 'pier'
+                'man_made': 'pier',
+                'aeroway' : [
+                    # 'aerodrome',
+                    'apron',
+                    'helipad',
+                    'heliport',
+                    'spaceport',
+                ]
             }
         },
         'beach'    : {

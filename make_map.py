@@ -47,7 +47,7 @@ def make_map(
     fontpath = str(fontpath)
 
     ax.text(
-        xmin - 0.0225 * dx, ymin + 0.7 * dy,
+        xmin - 0.0225 * dx, ymin + 0.6 * dy,
         left_text,
         color='#2F3737',
         rotation=90,
