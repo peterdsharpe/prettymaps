@@ -26,7 +26,7 @@ def get_defaults(
                 'bridleway'   : 1,
                 'runway'      : 10,
                 'taxiway'     : 5,
-            }
+            },
         },
         'building' : {
             'tags'    : {
@@ -99,15 +99,34 @@ def get_defaults(
                 ]
             }
         },
+        'airways'  : {
+            'tags': {
+                'aeroway': [
+                    'runway',
+                    'taxiway',
+                ]
+            }
+        },
         'beach'    : {
             'tags': {
                 'natural': ['beach', 'heath']
             }
         },
+        'railway'  : {
+            'custom_filter': '["railway"~"rail|light_rail"]',
+            # 'dilate'       : 2000
+        }
     }
     # drawing_kwargs:
     #   Reference a name previously defined in the 'layers' argument and specify matplotlib parameters to draw it
     drawing_kwargs = {
+        'railway' : {
+            'fc'    : '#2F3737',
+            'ec'    : '#475657',
+            'alpha' : 1,
+            'lw'    : 0,
+            'zorder': 3
+        },
         'background': {
             'fc'    : '#F2F4CB',
             'ec'    : '#dadbc1',
@@ -159,6 +178,12 @@ def get_defaults(
             'lw'    : 1,
             'zorder': 3
         },
+        'airways'   : {
+            'fc'    : '#2F3737',
+            'ec'    : '#2F3737',
+            'lw'    : 2,
+            'zorder': 3,
+        },
         'streets'   : {
             'fc'    : '#2F3737',
             'ec'    : '#475657',
@@ -166,14 +191,6 @@ def get_defaults(
             'lw'    : 0,
             'zorder': 3
         },
-        # 'morewater' : {
-        #     'fc'     : '#a1e3ff',
-        #     'ec'     : '#2F3737',
-        #     'hatch'  : 'ooo...',
-        #     'hatch_c': '#85c9e6',
-        #     'lw'     : 0,
-        #     'zorder' : 2
-        # },
         'walls'     : {
             'fc'    : '#2F3737',
             'ec'    : '#475657',
@@ -204,6 +221,7 @@ def get_defaults(
     if square:
         for k, v in layers.items():
             v['circle'] = False
-            v['dilate'] = dilate
+            if 'dilate' not in v.keys():
+                v['dilate'] = dilate
 
     return layers, drawing_kwargs
