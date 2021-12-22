@@ -13,7 +13,6 @@ def make_map(
         location="Cambridge, MA",
         top_text="Cambridge, MA",
         left_text="42° 22' N, 71° 6' W",
-        save_location=None,
         radius=1500,
         square=True,
         debug=False,
@@ -75,4 +74,5 @@ def make_map(
 
 
 if __name__ == '__main__':
-    make_map(save_location="test.png")
+    make_map()
+    plt.savefig("test.png", dpi=300)
