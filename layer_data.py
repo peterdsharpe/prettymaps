@@ -112,21 +112,21 @@ def get_defaults(
                 'natural': ['beach', 'heath']
             }
         },
-        'railway'  : {
-            'custom_filter': '["railway"~"rail|light_rail"]',
-            # 'dilate'       : 2000
-        }
+        # 'railway'  : {
+        #     'custom_filter': '["railway"~"rail|light_rail"]',
+        #     # 'dilate'       : 2000
+        # }
     }
     # drawing_kwargs:
     #   Reference a name previously defined in the 'layers' argument and specify matplotlib parameters to draw it
     drawing_kwargs = {
-        'railway' : {
-            'fc'    : '#2F3737',
-            'ec'    : '#475657',
-            'alpha' : 1,
-            'lw'    : 0,
-            'zorder': 3
-        },
+        # 'railway' : {
+        #     'fc'    : '#2F3737',
+        #     'ec'    : '#475657',
+        #     'alpha' : 1,
+        #     'lw'    : 0,
+        #     'zorder': 3
+        # },
         'background': {
             'fc'    : '#F2F4CB',
             'ec'    : '#dadbc1',
