@@ -1,8 +1,7 @@
-import vsketch
 import prettymaps
 import matplotlib.font_manager as fm
 from matplotlib import pyplot as plt
-from layer_data import get_defaults
+from prettymaps.layer_data import get_defaults
 from pathlib import Path
 import time
 
