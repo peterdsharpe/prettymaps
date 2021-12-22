@@ -1,37 +1,41 @@
 import vsketch
-from prettymaps import plot
+import prettymaps
 import matplotlib.font_manager as fm
 from matplotlib import pyplot as plt
 from layer_data import get_defaults
 from pathlib import Path
+import time
 
 this_dir = Path(__file__).parent
 
 
 def make_map(
+        figsize=(12, 12),
         location="Cambridge, MA",
-        left_text="Cambridge, MA",
-        top_text="42° 22' N, 71° 6' W",
+        top_text="Cambridge, MA",
+        left_text="42° 22' N, 71° 6' W",
         save_location=None,
-        radius=2000,
+        radius=1500,
         square=True,
-        dilate=300,
         debug=False,
 ):
-    # Init matplotlib figure
-    fig, ax = plt.subplots(figsize=(18, 18), constrained_layout=True)
+    t1 = time.perf_counter()
 
-    layers, drawing_kwargs = get_defaults(
+    layers_in, drawing_kwargs_in = get_defaults(
         square=square,
-        dilate=dilate
+        dilate=radius * 0.2,
     )
 
+    fig, ax = plt.subplots(figsize=figsize, constrained_layout=True, dpi=300)
+
     if not debug:
-        layers = plot(
-            location, radius=radius,
+        layers = prettymaps.plot(
+            query=location,
             ax=ax,
-            layers=layers,
-            drawing_kwargs=drawing_kwargs
+            radius=radius,
+            layers=layers_in,
+            drawing_kwargs=drawing_kwargs_in,
+            osm_credit=False,
         )
         xmin, ymin, xmax, ymax = layers['perimeter'].bounds
     else:
@@ -51,7 +55,7 @@ def make_map(
         left_text,
         color='#2F3737',
         rotation=90,
-        fontproperties=fm.FontProperties(fname=fontpath, size=50),
+        fontproperties=fm.FontProperties(fname=fontpath, size=30),
         va='center',
         ha='center',
     )
@@ -60,9 +64,16 @@ def make_map(
         xmin + 0.7 * dx, ymax + 0.0225 * dy,
         top_text,
         color='#2F3737',
-        fontproperties=fm.FontProperties(fname=fontpath, size=35),
+        fontproperties=fm.FontProperties(fname=fontpath, size=30),
         va='center',
         ha='center',
     )
 
-    plt.savefig(save_location)
+    t2 = time.perf_counter()
+    print(f"{location} drawn in {t2 - t1:.3f} seconds.")
+
+    return fig, ax
+
+
+if __name__ == '__main__':
+    make_map(save_location="test.png")
