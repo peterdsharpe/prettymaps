@@ -17,6 +17,7 @@ def make_map(
         square=True,
         debug=False,
 ):
+    print(f"Drawing {location}...")
     t1 = time.perf_counter()
 
     layers_in, drawing_kwargs_in = get_defaults(
