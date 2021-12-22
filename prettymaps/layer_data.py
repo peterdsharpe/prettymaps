@@ -59,14 +59,19 @@ def get_defaults(
         # },
         'green'    : {
             'tags': {
-                'landuse': ['grass', 'orchard'],
-                'natural': ['island', 'wood'],
+                'landuse': ['grass', 'orchard', 'meadow', 'cemetery'],
+                'natural': ['island', 'wood', 'grassland'],
                 'leisure': 'park'
             }
         },
         'scrub'    : {
             'tags': {
                 'natural': 'scrub'
+            }
+        },
+        'rocky' : {
+            'tags': {
+                'natural': 'bare_rock'
             }
         },
         'walls'    : {
@@ -82,7 +87,7 @@ def get_defaults(
         },
         'garden'   : {
             'tags': {
-                'leisure': ['garden', 'pitch']
+                'leisure': ['garden', 'pitch', 'vineyard']
             }
         },
         'parking'  : {
@@ -109,7 +114,8 @@ def get_defaults(
         },
         'beach'    : {
             'tags': {
-                'natural': ['beach', 'heath']
+                'natural': ['beach', 'heath'],
+                'landuse': 'farmland',
             }
         },
         # 'railway'  : {
@@ -148,6 +154,14 @@ def get_defaults(
             'fc'     : '#89d689',
             'ec'     : '#2F3737',
             'hatch_c': '#75bd75',
+            'hatch'  : 'ooo...',
+            'lw'     : 1,
+            'zorder' : 1
+        },
+        'rocky': {
+            'fc'     : '#a89e8a',
+            'ec'     : '#2F3737',
+            'hatch_c': '#a39c8f',
             'hatch'  : 'ooo...',
             'lw'     : 1,
             'zorder' : 1

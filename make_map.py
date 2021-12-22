@@ -22,7 +22,7 @@ def make_map(
 
     layers_in, drawing_kwargs_in = get_defaults(
         square=square,
-        dilate=radius * 0.2,
+        dilate=radius * 0.3,
     )
 
     fig, ax = plt.subplots(figsize=figsize, constrained_layout=True, dpi=300)
