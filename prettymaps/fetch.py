@@ -32,7 +32,7 @@ from geopandas import GeoDataFrame, read_file
 
 
 def get_boundary(
-    point: Tuple, radius: float, crs: String, circle: Boolean = True, dilate: float = 0
+        point: Tuple, radius: float, crs: String, circle: Boolean = True, dilate: float = 0
 ) -> Polygon:
     """
     Compute circular or square boundary given point, radius and crs.
@@ -51,14 +51,14 @@ def get_boundary(
     if circle:
         return (
             ox.project_gdf(GeoDataFrame(geometry=[Point(point[::-1])], crs=crs))
-            .geometry[0]
-            .buffer(radius)
+                .geometry[0]
+                .buffer(radius)
         )
     else:
         x, y = np.stack(
             ox.project_gdf(GeoDataFrame(geometry=[Point(point[::-1])], crs=crs))
-            .geometry[0]
-            .xy
+                .geometry[0]
+                .xy
         )
         r = radius
         return Polygon(
@@ -86,17 +86,16 @@ def get_perimeter(query, by_osmid: Boolean = False, **kwargs) -> GeoDataFrame:
 
 
 def get_coast(
-    perimeter=None,
-    point=None,
-    radius=None,
-    perimeter_tolerance=0,
-    union=True,
-    buffer=0,
-    circle=True,
-    dilate=0,
-    file_location=None,
+        perimeter=None,
+        point=None,
+        radius=None,
+        perimeter_tolerance=0,
+        union=True,
+        buffer=0,
+        circle=True,
+        dilate=0,
+        file_location=None,
 ):
-
     if perimeter is not None:
         # Boundary defined by polygon (perimeter)
         bbox = perimeter.to_crs(3174)
@@ -155,17 +154,17 @@ def get_coast(
 
 
 def get_geometries(
-    perimeter: Optional[GeoDataFrame] = None,
-    point: Optional[Tuple] = None,
-    radius: Optional[float] = None,
-    tags: Dict = {},
-    perimeter_tolerance: float = 0,
-    union: Boolean = True,
-    buffer: float = 0,
-    circle: Boolean = True,
-    dilate: float = 0,
-    point_size: float = 1,
-    line_width: float = 1
+        perimeter: Optional[GeoDataFrame] = None,
+        point: Optional[Tuple] = None,
+        radius: Optional[float] = None,
+        tags: Dict = {},
+        perimeter_tolerance: float = 0,
+        union: Boolean = True,
+        buffer: float = 0,
+        circle: Boolean = True,
+        dilate: float = 0,
+        point_size: float = 1,
+        line_width: float = 1
 ) -> Union[Polygon, MultiPolygon]:
     """Get geometries
 
@@ -186,8 +185,8 @@ def get_geometries(
     # Boundary defined by polygon (perimeter)
     if perimeter is not None:
         geometries = ox.geometries_from_polygon(
-            unary_union(perimeter.to_crs(3174).buffer(buffer+perimeter_tolerance).to_crs(4326).geometry)
-            if buffer >0 or perimeter_tolerance > 0
+            unary_union(perimeter.to_crs(3174).buffer(buffer + perimeter_tolerance).to_crs(4326).geometry)
+            if buffer > 0 or perimeter_tolerance > 0
             else unary_union(perimeter.geometry),
             tags={tags: True} if type(tags) == str else tags,
         )
@@ -219,27 +218,28 @@ def get_geometries(
     points = [x.buffer(point_size) for x in points]
     lines = [x.buffer(line_width) for x in lines]
     # Concatenate multipolys
-    multipolys = reduce(lambda x,y: x+y, [list(x) for x in multipolys]) if len(multipolys) > 0 else []
+    multipolys = reduce(lambda x, y: x + y, [list(x) for x in multipolys]) if len(multipolys) > 0 else []
     # Group everything
     geometries = MultiPolygon(points + lines + polys + multipolys)
     # Compute union if specified
-    if union: geometries = unary_union(geometries);
+    if union:
+        geometries = unary_union(geometries);
 
     return geometries
 
 
 def get_streets(
-    perimeter: Optional[GeoDataFrame] = None,
-    point: Optional[Tuple] = None,
-    radius: Optional[float] = None,
-    layer: String = "streets",
-    width: float = 6,
-    custom_filter: Optional[str] = None,
-    buffer: float = 0,
-    retain_all: Boolean = False,
-    circle: Boolean = True,
-    dilate: float = 0,
-    truncate_by_edge: Boolean = True 
+        perimeter: Optional[GeoDataFrame] = None,
+        point: Optional[Tuple] = None,
+        radius: Optional[float] = None,
+        layer: String = "streets",
+        width: float = 6,
+        custom_filter: Optional[str] = None,
+        buffer: float = 0,
+        retain_all: Boolean = False,
+        circle: Boolean = True,
+        dilate: float = 0,
+        truncate_by_edge: Boolean = True
 ) -> MultiPolygon:
     """
     Get streets
@@ -287,7 +287,7 @@ def get_streets(
                 dist=radius + dilate + buffer,
                 retain_all=retain_all,
                 custom_filter=custom_filter,
-                truncate_by_edge = truncate_by_edge,
+                truncate_by_edge=truncate_by_edge,
             )
             crs = ox.graph_to_gdfs(streets, nodes=False).crs
             streets = ox.project_graph(streets)
@@ -309,15 +309,15 @@ def get_streets(
                     streets[
                         [highway in value for value in streets[layer]]
                         & (streets.geometry.type == "LineString")
-                    ].geometry.tolist()
+                        ].geometry.tolist()
                     + list(
                         reduce(
                             lambda x, y: x + y,
                             [
                                 list(lines)
                                 for lines in streets[
-                                    [highway in value for value in streets[layer]]
-                                    & (streets.geometry.type == "MultiLineString")
+                                [highway in value for value in streets[layer]]
+                                & (streets.geometry.type == "MultiLineString")
                                 ].geometry
                             ],
                             [],
@@ -329,7 +329,7 @@ def get_streets(
         )
     else:
         # Dilate all streets by same amount 'width'
-        streets=  MultiLineString(
+        streets = MultiLineString(
             streets[streets.geometry.type == "LineString"].geometry.tolist()
             + list(
                 reduce(

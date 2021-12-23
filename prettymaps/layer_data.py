@@ -69,7 +69,7 @@ def get_defaults(
                 'natural': 'scrub'
             }
         },
-        'rocky' : {
+        'rocky'    : {
             'tags': {
                 'natural': 'bare_rock'
             }
@@ -158,7 +158,7 @@ def get_defaults(
             'lw'     : 1,
             'zorder' : 1
         },
-        'rocky': {
+        'rocky'     : {
             'fc'     : '#a89e8a',
             'ec'     : '#2F3737',
             'hatch_c': '#a39c8f',

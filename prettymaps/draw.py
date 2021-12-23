@@ -121,32 +121,32 @@ def draw_text(ax, text, x, y, **kwargs):
 
 # Plot
 def plot(
-    # Address
-    query,
-    # Whether to use a backup for the layers
-    backup=None,
-    # Custom postprocessing function on layers
-    postprocessing=None,
-    # Radius (in case of circular plot)
-    radius=None,
-    # Which layers to plot
-    layers={"perimeter": {}},
-    # Drawing params for each layer (matplotlib params such as 'fc', 'ec', 'fill', etc.)
-    drawing_kwargs={},
-    # OSM Caption parameters
-    osm_credit={},
-    # Figure parameters
-    figsize=(10, 10),
-    ax=None,
-    title=None,
-    # Vsketch parameters
-    vsketch=None,
-    # Transform (translation & scale) params
-    x=None,
-    y=None,
-    scale_x=None,
-    scale_y=None,
-    rotation=None,
+        # Address
+        query,
+        # Whether to use a backup for the layers
+        backup=None,
+        # Custom postprocessing function on layers
+        postprocessing=None,
+        # Radius (in case of circular plot)
+        radius=None,
+        # Which layers to plot
+        layers={"perimeter": {}},
+        # Drawing params for each layer (matplotlib params such as 'fc', 'ec', 'fill', etc.)
+        drawing_kwargs={},
+        # OSM Caption parameters
+        osm_credit={},
+        # Figure parameters
+        figsize=(10, 10),
+        ax=None,
+        title=None,
+        # Vsketch parameters
+        vsketch=None,
+        # Transform (translation & scale) params
+        x=None,
+        y=None,
+        scale_x=None,
+        scale_y=None,
+        rotation=None,
 ):
     """
     
@@ -216,7 +216,7 @@ def plot(
         # Define base kwargs
         if radius:
             base_kwargs = {
-                "point": query if query_mode == "coordinates" else ox.geocode(query),
+                "point" : query if query_mode == "coordinates" else ox.geocode(query),
                 "radius": radius,
             }
         else:
