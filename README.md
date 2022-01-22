@@ -1,6 +1,6 @@
 # Pretty Maps
 
-Tools to make pretty maps of areas of interest, with my own tweaks.
+Tools to make pretty maps of areas of interest.
 
 ## Usage
 
