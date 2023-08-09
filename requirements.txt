@@ -1,7 +1,7 @@
-osmnx
+osmnx==1.2.2
 pandas
 geopandas
 numpy
-shapely
+Shapely>=1.8,<2.0
 descartes
 tabulate
