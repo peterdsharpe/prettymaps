@@ -261,7 +261,7 @@ def get_streets(
         MultiPolygon: [description]
     """
 
-    if layer == "streets":
+    if layer in ["streets", "waterway", "railway"]:
         layer = "highway"
 
     # Boundary defined by polygon (perimeter)

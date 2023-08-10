@@ -44,23 +44,25 @@ def get_defaults(
                 'natural' : ['water', 'bay', 'strait', 'spring', 'hot_spring'],
                 'water'   : True,
                 'place'   : 'sea',
-                'waterway': True,
+                # 'waterway': True,
             }
         },
-        # 'morewater' : {
-        #     # 'custom_filter': 'waterway'
-        #     'tags': {
-        #         'waterway': True
-        #     },
-        #     # 'width': {
-        #     #     'canal': 5,
-        #     #     'dock': 10,
-        #     # }
-        # },
+        'waterway': {
+            # 'custom_filter': 'waterway'
+            # 'tags' : {
+            #     'waterway': True
+            # },
+            'width': {
+                'canal' : 5,
+                'dock'  : 10,
+                'stream': 2,
+            }
+        },
         'green'    : {
             'tags': {
-                'landuse': ['grass', 'orchard', 'meadow', 'cemetery'],
-                'natural': ['island', 'wood', 'grassland'],
+                'landuse': ['grass', 'orchard', 'meadow', 'cemetery', 'recreation_ground', 'village_green',
+                            'allotments'],
+                'natural': ['island', 'grassland'],
                 'leisure': 'park'
             }
         },
@@ -83,6 +85,8 @@ def get_defaults(
         'forest'   : {
             'tags': {
                 'landuse': 'forest',
+                'natural': 'wood',
+                'tourism': 'camp_site',
             }
         },
         'garden'   : {
@@ -116,6 +120,18 @@ def get_defaults(
             'tags': {
                 'natural': ['beach', 'heath'],
                 'landuse': 'farmland',
+            }
+        },
+        'wetlands' : {
+            'tags': {
+                'natural': ['wetland'],
+                'leisure': ['nature_reserve'],
+                'landuse': ['conservation'],
+            }
+        },
+        'swamp'    : {
+            'tags': {
+                'wetland': ['swamp'],
             }
         },
         # 'railway'  : {
@@ -167,10 +183,12 @@ def get_defaults(
             'zorder' : 1
         },
         'forest'    : {
-            'fc'    : '#64B96A',
-            'ec'    : '#2F3737',
-            'lw'    : 1,
-            'zorder': 1
+            'fc'     : '#64B96A',
+            'ec'     : '#2F3737',
+            'hatch'  : 'ooo...',
+            'hatch_c': '#5f8c62',
+            'lw'     : 1,
+            'zorder' : 1
         },
         'garden'    : {
             'fc'    : '#a9d1a9',
@@ -205,6 +223,13 @@ def get_defaults(
             'lw'    : 0,
             'zorder': 3
         },
+        'waterway' : {
+            'fc'    : '#2f3737',
+            'ec'    : '#a1e3ff',
+            'alpha' : 1,
+            'lw'    : 0,
+            'zorder': 3
+        },
         'walls'     : {
             'fc'    : '#2F3737',
             'ec'    : '#475657',
@@ -226,6 +251,22 @@ def get_defaults(
             'lw'     : 1,
             'zorder' : 3
         },
+        'wetlands'  : {
+            'fc'     : '#8ab964',
+            'ec'     : '#2F3737',
+            'hatch_c': '#738d5e',
+            'hatch'  : 'ooo...',
+            'lw'     : 1,
+            'zorder' : 1,
+        },
+        'swamp'     : {
+            'fc'     : '#738d5e',
+            'ec'     : '#2F3737',
+            'hatch_c': '#5a6e49',
+            'hatch'  : 'ooo...',
+            'lw'     : 1,
+            'zorder' : 1,
+        }
     }
 
     assert len(drawing_kwargs) == len(layers) + 1
